@@ -1,0 +1,35 @@
+version: '3.4'
+services:
+
+  # "devbox" to enable the developer to have a fully loaded development environment
+  # to test new code using say IPython and other common tools.
+  devbox: &devbox
+    build:
+      dockerfile: ./docker/devbox.dockerfile
+      context: .
+      args:
+       BASE_OS: centos75
+       DOCKER_PYTHON_VERSION: python36
+       PYTHON_VERSION: python3.6
+       PROJECT_NAME: advent-of-code-2020
+    environment:
+      PYENV_VERSION: "advent-of-code-2020"
+      LC_ALL: 'en_US.UTF-8'
+      LANG: 'en_US.UTF-8'
+      PYTHONPATH: "/app"
+    image: "wayfair/advent-of-code-2020-devbox"
+    entrypoint: /bin/bash
+    volumes:
+      - ./:/app
+      - ./data:/data
+
+
+  task:
+    <<: *devbox
+    image: "wayfair/advent-of-code-2020-devbox"
+    environment:
+      - MY_TASK
+    command: docker/run_task.sh
+    volumes:
+      - ./:/app
+      - ./data:/data
