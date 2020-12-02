@@ -20,7 +20,7 @@ def main():
     args = parse_args()
     logger.info(f"task = {args.task}")
     advent = AdventOfCode()
-    advent.run(args.task, "/data/day1.dat")
+    advent.run(args.task, f"/data/day{args.task}.dat")
 
 
 if __name__ == "__main__":
