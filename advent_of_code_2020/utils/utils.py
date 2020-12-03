@@ -120,7 +120,7 @@ def count_trees_toboggan(forest_base, policy):
     return count_trees
 
 
-def day1(input_file):
+def day_1(input_file):
     expenses = [int(expense) for expense in read_list_file(input_file)]
     match_pair = find_pair_match_2020(expenses)
     match_pair_multiple = match_pair[0] * match_pair[1]
@@ -130,7 +130,7 @@ def day1(input_file):
     match_triple_multiple = match_triplet[0] * match_triplet[1] * match_triplet[2]
     logger.info(f"The matching triplet is {match_triplet}, which is {match_triple_multiple} when multiplied")
 
-def day2(input_file):
+def day_2(input_file):
        passwords_policies = read_password_file(input_file)
        count_passwords_meet_policies = sum([
            # does_password_meet_policy_count(password, policy)
@@ -139,7 +139,7 @@ def day2(input_file):
        ])
        logger.info(f"{count_passwords_meet_policies} passwords meet their policy")
 
-def day3(input_file):
+def day_3(input_file):
     forest_base = read_forest_file(input_file)
     policies = [
         [1, 1],
