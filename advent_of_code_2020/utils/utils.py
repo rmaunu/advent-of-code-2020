@@ -1,5 +1,9 @@
+import logging
 import re
 import numpy as np
+
+
+logger = logging.getLogger(__name__)
 
 
 def read_list_file(input_file):
@@ -17,6 +21,11 @@ def parse_password_policy(line):
     policy = ([int(match.group(1)), int(match.group(2))], match.group(3))
     password = match.group(4)
     return password, policy
+
+def read_forest_file(input_file):
+    lines = read_list_file(input_file)
+    forest_base = [[1 if c == "#" else 0 for c in line.rstrip()] for line in lines]
+    return forest_base
 
 # The main function to sort an array of given size
 def sort_list(arr, kind='quicksort'):
@@ -93,3 +102,57 @@ def does_password_meet_policy_position(password, policy):
         return True
     else:
         return False
+
+def count_trees_toboggan(forest_base, policy):
+    num_rows = len(forest_base)
+    num_columns = len(forest_base[0])
+
+    vertical_position = 0
+    horizontal_position = 0
+    count_trees = 0
+
+    while vertical_position < num_rows:
+        if forest_base[vertical_position][horizontal_position % num_columns]:
+            count_trees += 1
+        vertical_position += policy[0]
+        horizontal_position += policy[1]
+
+    return count_trees
+
+
+def day1(input_file):
+    expenses = [int(expense) for expense in read_list_file(input_file)]
+    match_pair = find_pair_match_2020(expenses)
+    match_pair_multiple = match_pair[0] * match_pair[1]
+    logger.info(f"The matching pair is {match_pair}, which is {match_pair_multiple} when multiplied")
+
+    match_triplet = find_triplet_match_2020(expenses)
+    match_triple_multiple = match_triplet[0] * match_triplet[1] * match_triplet[2]
+    logger.info(f"The matching triplet is {match_triplet}, which is {match_triple_multiple} when multiplied")
+
+def day2(input_file):
+       passwords_policies = read_password_file(input_file)
+       count_passwords_meet_policies = sum([
+           # does_password_meet_policy_count(password, policy)
+           does_password_meet_policy_position(password, policy)
+           for password, policy in passwords_policies
+       ])
+       logger.info(f"{count_passwords_meet_policies} passwords meet their policy")
+
+def day3(input_file):
+    forest_base = read_forest_file(input_file)
+    policies = [
+        [1, 1],
+        [1, 3],
+        [1, 5],
+        [1, 7],
+        [2, 1]
+    ]
+    counts_trees = []
+    for policy in policies:
+        count_trees = count_trees_toboggan(forest_base, policy)
+        counts_trees.append(count_trees)
+        logger.info(f"Your tobogggan hits {count_trees} trees")
+
+    count_trees_multiple = np.prod(counts_trees)
+    logger.info(f"Multiplied together you get {count_trees_multiple}")
