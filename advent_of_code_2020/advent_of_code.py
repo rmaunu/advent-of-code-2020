@@ -14,23 +14,23 @@ class AdventOfCode(object):
     def __init__(self):
         pass
 
-    def run(self, task, input_file):
-        method_to_call = getattr(AdventOfCode, f"day_{task}")
-        method_to_call(input_file)
+    def run(self, day, part, input_file):
+        method_to_call = getattr(AdventOfCode, f"day_{day}")
+        method_to_call(part, input_file)
         return
 
     @staticmethod
-    def day_1(input_file):
-        day_1(input_file)
+    def day_1(part, input_file):
+        day_1(part, input_file)
 
     @staticmethod
-    def day_2(input_file):
-        day_2(input_file)
+    def day_2(part, input_file):
+        day_2(part, input_file)
 
     @staticmethod
-    def day_3(input_file):
-        day_3(input_file)
+    def day_3(part, input_file):
+        day_3(part, input_file)
 
     @staticmethod
-    def day_4(input_file):
-        day_4(input_file)
+    def day_4(part, input_file):
+        day_4(part, input_file)

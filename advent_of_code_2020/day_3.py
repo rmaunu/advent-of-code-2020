@@ -29,20 +29,25 @@ def count_trees_toboggan(forest_base, policy):
     return count_trees
 
 
-def day_3(input_file):
+def day_3(part, input_file):
     forest_base = read_forest_file(input_file)
-    policies = [
-        [1, 1],
-        [1, 3],
-        [1, 5],
-        [1, 7],
-        [2, 1]
-    ]
-    counts_trees = []
-    for policy in policies:
-        count_trees = count_trees_toboggan(forest_base, policy)
-        counts_trees.append(count_trees)
+    if part  == 1:
+        count_trees = count_trees_toboggan(forest_base, [1, 3])
         logger.info(f"Your tobogggan hits {count_trees} trees")
 
-    count_trees_multiple = np.prod(counts_trees)
-    logger.info(f"Multiplied together you get {count_trees_multiple}")
+    elif part == 2:
+        policies = [
+            [1, 1],
+            [1, 3],
+            [1, 5],
+            [1, 7],
+            [2, 1]
+        ]
+        counts_trees = []
+        for policy in policies:
+            count_trees = count_trees_toboggan(forest_base, policy)
+            counts_trees.append(count_trees)
+            logger.info(f"Your tobogggan hits {count_trees} trees")
+
+        count_trees_multiple = np.prod(counts_trees)
+        logger.info(f"Multiplied together you get {count_trees_multiple}")

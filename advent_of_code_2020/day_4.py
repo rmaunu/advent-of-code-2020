@@ -153,46 +153,49 @@ def validate_passport(
     return is_valid_passport
 
 
-def day_4(input_file):
+def day_4(part, input_file):
     passports = read_passports(input_file)
-    field_validators = {
-        "byr": PassportValidator(
-            validators=[RangeValidator([1920, 2002])]
-        ),
-        "iyr": PassportValidator(
-            validators=[RangeValidator([2010, 2020])]
-        ),
-        "eyr": PassportValidator(
-            validators=[RangeValidator([2020, 2030])]
-        ),
-        "hgt": PassportValidator(
-            validators=[
-                RegexValidator(
-                    "^(\d*)cm$",
-                    group_validators=[
-                        RangeValidator([150, 193]),
-                    ]
-                ),
-                RegexValidator(
-                    "^(\d*)in$",
-                    group_validators=[
-                        RangeValidator([59, 76]),
-                    ]
-                ),
-            ],
-            check_type="any"
-        ),
-        "hcl": PassportValidator(
-            validators=[RegexValidator("^#[0-9|a-f]{6}$")],
-            check_type="any"
-        ),
-        "ecl": PassportValidator(
-            validators=[RegexValidator("^(amb|blu|brn|gry|grn|hzl|oth)$")],
-        ),
-        "pid": PassportValidator(
-            validators=[RegexValidator("^\d{9}$")],
-        ),
-    }
+    if part == 1:
+        field_validators = {}
+    elif part == 2:
+        field_validators = {
+            "byr": PassportValidator(
+                validators=[RangeValidator([1920, 2002])]
+            ),
+            "iyr": PassportValidator(
+                validators=[RangeValidator([2010, 2020])]
+            ),
+            "eyr": PassportValidator(
+                validators=[RangeValidator([2020, 2030])]
+            ),
+            "hgt": PassportValidator(
+                validators=[
+                    RegexValidator(
+                        "^(\d*)cm$",
+                        group_validators=[
+                            RangeValidator([150, 193]),
+                        ]
+                    ),
+                    RegexValidator(
+                        "^(\d*)in$",
+                        group_validators=[
+                            RangeValidator([59, 76]),
+                        ]
+                    ),
+                ],
+                check_type="any"
+            ),
+            "hcl": PassportValidator(
+                validators=[RegexValidator("^#[0-9|a-f]{6}$")],
+                check_type="any"
+            ),
+            "ecl": PassportValidator(
+                validators=[RegexValidator("^(amb|blu|brn|gry|grn|hzl|oth)$")],
+            ),
+            "pid": PassportValidator(
+                validators=[RegexValidator("^\d{9}$")],
+            ),
+        }
 
     num_passports = len(passports)
     valid_passport_count = sum([

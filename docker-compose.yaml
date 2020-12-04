@@ -24,12 +24,13 @@ services:
       - ./data:/data
 
 
-  task:
+  day:
     <<: *devbox
     image: "wayfair/advent-of-code-2020-devbox"
     environment:
-      - MY_TASK
-    command: docker/run_task.sh
+      - DAY
+      - PART
+    command: docker/run_day.sh
     volumes:
       - ./:/app
       - ./data:/data

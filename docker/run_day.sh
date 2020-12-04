@@ -4,4 +4,4 @@ set -e
 
 eval "$(pyenv init -)"
 
-python scripts/run_task.py $MY_TASK
+python scripts/run_day.py $DAY $PART

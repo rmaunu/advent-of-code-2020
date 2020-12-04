@@ -49,11 +49,17 @@ def does_password_meet_policy_position(password, policy):
         return False
 
 
-def day_2(input_file):
+def day_2(part, input_file):
     passwords_policies = read_password_file(input_file)
-    count_passwords_meet_policies = sum([
-        # does_password_meet_policy_count(password, policy)
-        does_password_meet_policy_position(password, policy)
-        for password, policy in passwords_policies
-    ])
-    logger.info(f"{count_passwords_meet_policies} passwords meet their policy")
+    if part == 1:
+        count_passwords_meet_policies = sum([
+            does_password_meet_policy_count(password, policy)
+            for password, policy in passwords_policies
+        ])
+        logger.info(f"{count_passwords_meet_policies} passwords meet their policy")
+    elif part == 2:
+        count_passwords_meet_policies = sum([
+            does_password_meet_policy_position(password, policy)
+            for password, policy in passwords_policies
+        ])
+        logger.info(f"{count_passwords_meet_policies} passwords meet their policy")

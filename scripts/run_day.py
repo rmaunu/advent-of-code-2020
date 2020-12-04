@@ -10,7 +10,8 @@ logger = logging.getLogger(__name__)
 
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument("task", type=int)
+    parser.add_argument("day", type=int)
+    parser.add_argument("part", type=int)
 
     parser.set_defaults(func=main)
     return parser.parse_args()
@@ -18,9 +19,9 @@ def parse_args():
 
 def main():
     args = parse_args()
-    logger.info(f"task = {args.task}")
+    logger.info(f"day = {args.day}")
     advent = AdventOfCode()
-    advent.run(args.task, f"/data/day{args.task}.dat")
+    advent.run(args.day, args.part, f"/data/day{args.day}.dat")
 
 
 if __name__ == "__main__":
