@@ -47,3 +47,13 @@ def day_5(part, input_file):
             seat_code(seat_assignment) for seat_assignment in seat_assignments
         ])
         logger.info(f"The maximum assigned seat code is {max_seat_code}")
+    if part == 2:
+        seat_assignments_set = set()
+        for seat_assignment in seat_assignments:
+            seat_assignments_set.add(seat_code(seat_assignment))
+        for row in range(TOTAL_ROW):
+            for column in range(TOTAL_COLUMNS):
+                seat_id = seat_code((row, column))
+                if seat_id not in seat_assignments_set:
+                    if seat_id-1 in seat_assignments_set and seat_id+1 in seat_assignments_set:
+                        logger.info(f"Your seat is ({row}, {column}) with ID {seat_id}")
