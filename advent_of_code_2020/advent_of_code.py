@@ -9,6 +9,7 @@ from .day_6 import day_6
 from .day_7 import day_7
 from .day_8 import day_8
 from .day_9 import day_9
+from .day_10 import day_10
 
 
 logger = logging.getLogger(__name__)
@@ -59,3 +60,7 @@ class AdventOfCode(object):
     @staticmethod
     def day_9(part, input_file):
         day_9(part, input_file)
+
+    @staticmethod
+    def day_10(part, input_file):
+        day_10(part, input_file)
